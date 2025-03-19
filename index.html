@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宝东联邦 - 自由与反抗</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-color: #FF5733;
+            --secondary-color: #1C2833;
+            --text-color: #EAECEE;
+            --accent-color: #F4D03F;
+            --card-bg-color: rgba(255, 255, 255, 0.05);
+            --hover-shadow: 0 0 20px rgba(255, 87, 51, 0.3);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background-color: rgba(28, 40, 51, 0.9);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px 0;
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(28, 40, 51, 0.8), rgba(28, 40, 51, 0.8)), url('https://dummyimage.com/1920x1080/1C2833/FF5733&text=Rebellion+Background');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            background-attachment: fixed;
+        }
+
+        .hero h1 {
+            font-size: 80px;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px rgba(255, 87, 51, 0.8);
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            max-width: 800px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: fadeInUp 1s ease;
+            box-shadow: 0 5px 15px rgba(255, 87, 51, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #FF4500;
+            transform: scale(1.05);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            position: relative;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--card-bg-color);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(45deg);
+            z-index: -1;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .card h3 {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(255, 87, 51, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .avatar {
+            transform: scale(1.1);
+        }
+
+        footer {
+            background-color: rgba(28, 40, 51, 0.9);
+            padding: 30px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #999;
+        }
+
+        footer .social-icons {
+            margin-top: 20px;
+        }
+
+        footer .social-icons a {
+            color: #999;
+            font-size: 24px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">首页</a></li>
+            <li><a href="#leaders">自由领袖</a></li>
+            <li><a href="#actions">行动号召</a></li>
+            <li><a href="#government">政府架构</a></li>
+            <li><a href="#currency">宝联货币</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>宝东联邦 <span>自由</span></h1>
+        <p>推翻金庚旭暴政，建立人民自主的联邦共和国</p>
+        <a href="#actions" class="cta-button">立即加入</a>
+    </section>
+
+    <div class="container" id="leaders">
+        <h2 class="section-title">自由先驱（创始团队）</h2>
+        <div class="card-grid">
+            <div class="card">
+                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=ZMX" alt="张明旭" class="avatar">
+                <h3>张明旭</h3>
+                <p>联邦总统<br>反抗军总司令</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=LPX" alt="刘和平" class="avatar">
+                <h3>刘和平</h3>
+                <p>副总统<br>调查局局长</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=ZRJ" alt="张日斤" class="avatar">
+                <h3>张日斤</h3>
+                <p>军事行动组负责人</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=WZH" alt="王哲瀚" class="avatar">
+                <h3>王哲瀚</h3>
+                <p>财政部部长</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=LYH" alt="梁韩元" class="avatar">
+                <h3>梁韩元</h3>
+                <p>法务部</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=BJJ" alt="毕jj" class="avatar">
+                <h3>李宇鑫</h3>
+                <p>陆军司令</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=BJJ" alt="毕jj" class="avatar">
+                <h3>于子硕</h3>
+                <p>海军司令</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=JM" alt="姜淼" class="avatar">
+                <h3>姜鸟</h3>
+                <p>参与者</p>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=BJJ" alt="毕jj" class="avatar">
+                <h3>毕jj</h3>
+                <p>参与者</p>
+            </div>
+            <!-- 这里可补充剩余成员 -->
+        </div>
+    </div>
+
+    <div class="container" id="currency">
+        <h2 class="section-title">宝联货币系统</h2>
+       
+    </div>
+
+    <div class="container" id="government">
+        <h2 class="section-title">联邦政府架构</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>行政院</h3>
+                <ul>
+                    <li>总统：张明旭</li>
+                    <li>副总统：刘和平</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>财政部</h3>
+                <ul>
+                    <li>部长：王哲瀚</li>
+                    <li>货币委员会：梁韩元</li>
+                </ul>
+            </div>
+            <!-- 其他部门可继续补充 -->
+        </div>
+    </div>
+
+    
+
+    <footer>
+        <p>宝东联邦 2025 | 宪法Version 1.0 | 开源代码：<a href="#" style="color: var(--primary-color)">GitHub</a></p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-telegram"></i> 官方Telegram</a>
+            <a href="#"><i class="fab fa-bitcoin"></i> 捐赠地址：BDD-XXX...</a>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.card').forEach(card => {
+                const offset = card.getBoundingClientRect().top - window.innerHeight;
+                if (offset < 0) {
+                    card.style.opacity = 1;
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.8s ease-out';
+        });
+    </script>
+</body>
+
+</html>
+    
