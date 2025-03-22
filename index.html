@@ -991,27 +991,7 @@
             }
         }
 
-        function checkDiscussionPeriod() {
-            const now = new Date().getTime();
-            const startTime = localStorage.getItem('lhyDiscussionStart') ? parseInt(localStorage.getItem('lhyDiscussionStart')) : now;
-            const timeElapsed = now - startTime;
-
-            if (timeElapsed >= discussionPeriod && !lhyResolved) {
-                lhyResolved = true;
-                localStorage.setItem('lhyResolved', 'true');
-                alert('梁翰元问题已自动解决，职位表现已可交互。');
-                updateJobTableState();
-            }
-        }
-
-        resolveButton.addEventListener('click', () => {
-            if (!lhyResolved) {
-                lhyResolved = true;
-                localStorage.setItem('lhyResolved', 'true');
-                alert('梁翰元问题已手动解决，职位表现已可交互。');
-                updateJobTableState();
-            }
-        });
+       
 
         if (!localStorage.getItem('lhyDiscussionStart')) {
             localStorage.setItem('lhyDiscussionStart', new Date().getTime());
