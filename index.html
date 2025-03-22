@@ -48,7 +48,7 @@
         .nav {
             background: rgba(28, 40, 51, 0.95);
             position: fixed;
-            top: 80px; /* Adjusted for alert section */
+            top: 80px;
             width: 100%;
             z-index: 1000;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
@@ -75,7 +75,6 @@
 
         .nav ul li a:hover {
             color: var(--primary-color);
-            transform: scale
         }
 
         .nav-toggle {
@@ -98,7 +97,7 @@
                 height: 100vh;
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
-                top: 80px; /* Adjusted for alert section */
+                top: 80px;
             }
 
             .nav.active {
@@ -128,7 +127,7 @@
             background-position: center;
             position: relative;
             background-attachment: fixed;
-            margin-top: 80px; /* Adjusted for alert section */
+            margin-top: 80px;
         }
 
         .emblem {
@@ -453,6 +452,11 @@
             background: rgba(255, 87, 51, 0.1);
         }
 
+        .job-table.disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -509,7 +513,7 @@
 
 <body>
     <div class="alert-section">
-        <p>梁翰元<br>法务部部长梁翰元想要谋权篡位，请注意！已知他意图谋夺副统领之位，我们需紧急商讨，废除其法务部部长职务，并将其踢出宝东联邦（等待商讨，1天后执行）。</p>
+        <p>梁翰元<br>法务部部长梁翰元想要谋权篡位，请注意！已知他意图谋夺副统领之位，我们需紧急商讨，废除其法务部部长职务，并将其踢出宝东联邦（等待商讨，1天后执行）。<br><button id="resolveLHY" style="margin-top: 10px; padding: 5px 15px; background: #FFF; color: #FF5733; border: none; border-radius: 5px; cursor: pointer;">解决梁翰元问题</button></p>
     </div>
 
     <button class="nav-toggle"><i class="fas fa-bars"></i></button>
@@ -757,7 +761,7 @@
     <div class="container" id="jobs">
         <h2 class="section-title">职位表</h2>
         <div class="table-container">
-            <table class="job-table">
+            <table class="job-table" id="jobTable">
                 <thead>
                     <tr>
                         <th>职位</th>
@@ -975,6 +979,48 @@
             }
         }
 
+        // Liang Hanyuan resolution logic
+        const jobTable = document.getElementById('jobTable');
+        const resolveButton = document.getElementById('resolveLHY');
+        const discussionPeriod = 1 * 24 * 60 * 60 * 1000; // 1 day in milliseconds
+        let lhyResolved = localStorage.getItem('lhyResolved') === 'true';
+
+        function updateJobTableState() {
+            if (!lhyResolved) {
+                jobTable.classList.add('disabled');
+            } else {
+                jobTable.classList.remove('disabled');
+            }
+        }
+
+        function checkDiscussionPeriod() {
+            const now = new Date().getTime();
+            const startTime = localStorage.getItem('lhyDiscussionStart') ? parseInt(localStorage.getItem('lhyDiscussionStart')) : now;
+            const timeElapsed = now - startTime;
+
+            if (timeElapsed >= discussionPeriod && !lhyResolved) {
+                lhyResolved = true;
+                localStorage.setItem('lhyResolved', 'true');
+                alert('梁翰元问题已自动解决，职位表现已可交互。');
+                updateJobTableState();
+            }
+        }
+
+        resolveButton.addEventListener('click', () => {
+            if (!lhyResolved) {
+                lhyResolved = true;
+                localStorage.setItem('lhyResolved', 'true');
+                alert('梁翰元问题已手动解决，职位表现已可交互。');
+                updateJobTableState();
+            }
+        });
+
+        if (!localStorage.getItem('lhyDiscussionStart')) {
+            localStorage.setItem('lhyDiscussionStart', new Date().getTime());
+        }
+
+        setInterval(checkDiscussionPeriod, 1000);
+
         setInterval(updateElectionTimer, 1000);
 
         window.onload = () => {
@@ -982,6 +1028,8 @@
             updateVoteResults();
             updatePresidentVoteResults();
             updateElectionTimer();
+            updateJobTableState();
+            checkDiscussionPeriod();
         };
     </script>
 </body>
