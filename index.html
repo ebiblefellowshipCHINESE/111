@@ -14,8 +14,8 @@
             --secondary-color: #1C2833;
             --text-color: #EAECEE;
             --accent-color: #F4D03F;
-            --card-bg-color: rgba(255, 255, 255, 0.05);
-            --hover-shadow: 0 0 20px rgba(255, 87, 51, 0.3);
+            --card-bg-color: rgba(255, 255, 255, 0.08);
+            --hover-shadow: 0 0 25px rgba(255, 87, 51, 0.5);
         }
 
         body {
@@ -25,54 +25,77 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            line-height: 1.5;
         }
 
-        nav {
-            background-color: rgba(28, 40, 51, 0.9);
+        .nav {
+            background: rgba(28, 40, 51, 0.95);
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
         }
 
-        nav ul {
-            list-style-type: none;
+        .nav ul {
+            list-style: none;
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 35px;
             padding: 20px 0;
             margin: 0;
         }
 
-        nav ul li a {
+        .nav ul li a {
             color: var(--text-color);
             text-decoration: none;
-            font-size: 18px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
+            font-size: 19px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
         }
 
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover {
+        .nav ul li a:hover {
             color: var(--primary-color);
+            transform: scale
         }
 
-        nav ul li a:hover::after {
-            width: 100%;
+        .nav-toggle {
+            display: none;
+            font-size: 28px;
+            color: var(--text-color);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1100;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                width: 250px;
+                height: 100vh;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav.active {
+                transform: translateX(0);
+            }
+
+            .nav ul {
+                flex-direction: column;
+                padding: 60px 20px;
+                gap: 25px;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
         }
 
         .hero {
@@ -82,21 +105,25 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(28, 40, 51, 0.8), rgba(28, 40, 51, 0.8)), url('https://dummyimage.com/1920x1080/1C2833/FF5733&text=Rebellion+Background');
+            background: linear-gradient(rgba(28, 40, 51, 0.85), rgba(28, 40, 51, 0.85)), url('https://dummyimage.com/1920x1080/1C2833/FF5733&text=Rebellion+Background');
             background-size: cover;
             background-position: center;
             position: relative;
             background-attachment: fixed;
         }
 
+        .emblem {
+            width: 100px;
+        }
+
         .hero h1 {
-            font-size: 80px;
+            font-size: 90px;
             color: var(--primary-color);
-            text-shadow: 0 0 15px rgba(255, 87, 51, 0.8);
-            margin-bottom: 20px;
-            animation: fadeInDown 1s ease;
+            text-shadow: 0 0 20px rgba(255, 87, 51, 0.9);
+            margin-bottom: 25px;
+            animation: fadeInDown 1.2s ease;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
         }
 
         .hero h1 span {
@@ -104,28 +131,33 @@
         }
 
         .hero p {
-            font-size: 24px;
-            margin-bottom: 40px;
-            max-width: 800px;
-            line-height: 1.6;
-            animation: fadeInUp 1s ease;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font-size: 26px;
+            margin-bottom: 50px;
+            max-width: 900px;
+            line-height: 1.7;
+            animation: fadeInUp 1.2s ease;
+            text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
         }
 
         .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: var(--primary-color);
-            color: white;
+            padding: 18px 40px;
+            background: var(--primary-color);
+            color: #FFF;
             text-decoration: none;
             border-radius: 50px;
-            font-size: 20px;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            animation: fadeInUp 1s ease;
-            box-shadow: 0 5px 15px rgba(255, 87, 51, 0.3);
+            font-size: 22px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1.2s ease;
+            box-shadow: 0 6px 20px rgba(255, 87, 51, 0.5);
             position: relative;
             overflow: hidden;
+        }
+
+        .cta-button:hover {
+            background: #FF4500;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 87, 51, 0.7);
         }
 
         .cta-button::before {
@@ -135,13 +167,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.5s ease;
-        }
-
-        .cta-button:hover {
-            background-color: #FF4500;
-            transform: scale(1.05);
         }
 
         .cta-button:hover::before {
@@ -149,215 +176,478 @@
         }
 
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .container {
-            padding: 80px 20px;
-            max-width: 1200px;
+            padding: 100px 20px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
         .section-title {
-            font-size: 48px;
+            font-size: 50px;
             color: var(--primary-color);
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             text-transform: uppercase;
             position: relative;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255, 87, 51, 0.5);
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent-color);
+            width: 100px;
+            height: 5px;
+            background: var(--accent-color);
+            border-radius: 5px;
         }
 
         .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: var(--card-bg-color);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 87, 51, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .card h3 {
+            font-size: 26px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(255, 87, 51, 0.5);
+        }
+
+        .card p, .card ul {
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 25px;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(255, 87, 51, 0.6);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover .avatar {
+            transform: scale(1.15);
+        }
+
+        .vote-section {
+            margin-top: 15px;
+        }
+
+        .vote-section button {
+            background: var(--primary-color);
+            border: none;
+            padding: 10px 20px;
+            color: #FFF;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .vote-section button:hover {
+            background: #FF4500;
+        }
+
+        .vote-results {
+            margin-top: 10px;
+            font-size: 15px;
+        }
+
+        footer {
+            background: rgba(28, 40, 51, 0.95);
+            padding: 40px 0;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 87, 51, 0.3);
+        }
+
+        .footer p {
+            font-size: 15px;
+            color: #BBB;
+        }
+
+        footer .social-icons {
+            margin-top: 25px;
+        }
+
+        footer .social-icons a {
+            color: #BBB;
+            font-size: 28px;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .anthem-player {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(28, 40, 51, 0.9);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .anthem-player button {
+            background: var(--primary-color);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: #FFF;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .anthem-player button:hover {
+            background: #FF4500;
+            transform: scale(1.1);
+        }
+
+        .anthem-player span {
+            font-size: 16px;
+            color: var(--text-color);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: #FFF;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 87, 51, 0.5);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            background: #FF4500;
+            transform: scale(1.1);
+        }
+
+        .image-upload {
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--accent-color);
+            cursor: pointer;
+        }
+
+        .image-upload input {
+            display: none;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .job-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .job-table th, .job-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 87, 51, 0.2);
+        }
+
+        .job-table th {
+            background: var(--primary-color);
+            color: #FFF;
+            text-transform: uppercase;
+        }
+
+        .job-table td {
+            color: var(--text-color);
+        }
+
+        .job-table tr:hover {
+            background: rgba(255, 87, 51, 0.1);
+        }
+
+        .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        .card {
-            background-color: var(--card-bg-color);
-            border-radius: 15px;
-            padding: 30px;
+        .video-card {
+            background: var(--card-bg-color);
+            border-radius: 20px;
+            padding: 20px;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
         }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.05);
-            transform: rotate(45deg);
-            z-index: -1;
-        }
-
-        .card:hover {
+        .video-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--hover-shadow);
         }
 
-        .card h3 {
-            font-size: 24px;
+        .video-card iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .video-card h3 {
+            margin-top: 15px;
+            font-size: 20px;
             color: var(--primary-color);
-            margin-bottom: 15px;
         }
 
-        .card p {
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 4px solid var(--primary-color);
-            box-shadow: 0 0 10px rgba(255, 87, 51, 0.5);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover .avatar {
-            transform: scale(1.1);
-        }
-
-        footer {
-            background-color: rgba(28, 40, 51, 0.9);
-            padding: 30px 0;
+        .election-timer {
+            font-size: 20px;
+            color: var(--accent-color);
             text-align: center;
-            backdrop-filter: blur(10px);
+            margin-bottom: 20px;
         }
 
-        footer p {
-            font-size: 14px;
-            color: #999;
+        .party-flag {
+            width: 250px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 87, 51, 0.6);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            animation: wave 2s infinite ease-in-out;
         }
 
-        footer .social-icons {
-            margin-top: 20px;
-        }
-
-        footer .social-icons a {
-            color: #999;
-            font-size: 24px;
-            margin: 0 10px;
-            transition: color 0.3s ease;
-        }
-
-        footer .social-icons a:hover {
-            color: var(--primary-color);
+        .card:hover .party-flag {
+            transform: scale(1.1) rotate(3deg);
+            box-shadow: 0 0 25px rgba(255, 87, 51, 0.8);
         }
     </style>
 </head>
 
 <body>
-    <nav>
+    <button class="nav-toggle"><i class="fas fa-bars"></i></button>
+    <div class="nav">
         <ul>
             <li><a href="#home">首页</a></li>
             <li><a href="#leaders">自由领袖</a></li>
             <li><a href="#actions">行动号召</a></li>
             <li><a href="#government">政府架构</a></li>
             <li><a href="#currency">宝联货币</a></li>
+            <li><a href="#congress">国会</a></li>
+            <li><a href="#jiangyonghui">将永辉</a></li>
         </ul>
-    </nav>
+    </div>
 
     <section class="hero" id="home">
+        <div class="flag"><img src="1.png" alt="Raised Flag" width="300px"></div>
+        <br>
         <h1>宝东联邦 <span>自由</span></h1>
         <p>推翻金庚旭暴政，建立人民自主的联邦共和国</p>
-        <a href="#actions" class="cta-button">立即加入</a>
+        <a href="#leaders" class="cta-button">立即加入</a>
     </section>
 
     <div class="container" id="leaders">
         <h2 class="section-title">自由先驱（创始团队）</h2>
         <div class="card-grid">
             <div class="card">
-                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=ZMX" alt="张明旭" class="avatar">
+                <img src="" alt="张明旭" class="avatar" id="avatar-ZMX">
                 <h3>张明旭</h3>
                 <p>联邦总统<br>反抗军总司令</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'ZMX')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="vote('ZMX')">投票</button>
+                    <div class="vote-results" id="votes-ZMX">票数: 0 (0%)</div>
+                </div>
             </div>
             <div class="card">
-                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=LPX" alt="刘和平" class="avatar">
+                <img src="" alt="刘和平" class="avatar" id="avatar-LPX">
                 <h3>刘和平</h3>
                 <p>副总统<br>调查局局长</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'LPX')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="vote('LPX')">投票</button>
+                    <div class="vote-results" id="votes-LPX">票数: 0 (0%)</div>
+                </div>
             </div>
             <div class="card">
-                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=ZRJ" alt="张日斤" class="avatar">
+                <img src="" alt="张日斤" class="avatar" id="avatar-ZRJ">
                 <h3>张日斤</h3>
                 <p>军事行动组负责人</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'ZRJ')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="vote('ZRJ')">投票</button>
+                    <div class="vote-results" id="votes-ZRJ">票数: 0 (0%)</div>
+                </div>
             </div>
             <div class="card">
-                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=WZH" alt="王哲瀚" class="avatar">
+                <img src="" alt="王哲瀚" class="avatar" id="avatar-WZH">
                 <h3>王哲瀚</h3>
                 <p>财政部部长</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'WZH')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="vote('WZH')">投票</button>
+                    <div class="vote-results" id="votes-WZH">票数: 0 (0%)</div>
+                </div>
             </div>
             <div class="card">
-                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=LYH" alt="梁韩元" class="avatar">
+                <img src="" alt="梁韩元" class="avatar" id="avatar-LYH">
                 <h3>梁韩元</h3>
                 <p>法务部</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'LYH')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="vote('LYH')">投票</button>
+                    <div class="vote-results" id="votes-LYH">票数: 0 (0%)</div>
+                </div>
             </div>
             <div class="card">
-                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=BJJ" alt="毕jj" class="avatar">
+                <img src="" alt="李宇鑫" class="avatar" id="avatar-LYX">
                 <h3>李宇鑫</h3>
                 <p>陆军司令</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'LYX')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="vote('LYX')">投票</button>
+                    <div class="vote-results" id="votes-LYX">票数: 0 (0%)</div>
+                </div>
             </div>
             <div class="card">
-                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=BJJ" alt="毕jj" class="avatar">
+                <img src="" alt="于子硕" class="avatar" id="avatar-YZS">
                 <h3>于子硕</h3>
                 <p>海军司令</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'YZS')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="vote('YZS')">投票</button>
+                    <div class="vote-results" id="votes-YZS">票数: 0 (0%)</div>
+                </div>
             </div>
             <div class="card">
-                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=JM" alt="姜淼" class="avatar">
-                <h3>姜鸟</h3>
+                <img src="" alt="姜淼" class="avatar" id="avatar-JM">
+                <h3>姜淼</h3>
                 <p>参与者</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'JM')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="vote('JM')">投票</button>
+                    <div class="vote-results" id="votes-JM">票数: 0 (0%)</div>
+                </div>
             </div>
             <div class="card">
-                <img src="https://via.placeholder.com/120x120/FF5733/FFF?text=BJJ" alt="毕jj" class="avatar">
+                <img src="" alt="毕jj" class="avatar" id="avatar-BJJ">
                 <h3>毕jj</h3>
                 <p>参与者</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'BJJ')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="vote('BJJ')">投票</button>
+                    <div class="vote-results" id="votes-BJJ">票数: 0 (0%)</div>
+                </div>
             </div>
-            <!-- 这里可补充剩余成员 -->
+            <div class="card">
+                <img src="" alt="坤坤浩" class="avatar" id="avatar-KKH">
+                <h3>坤坤浩</h3>
+                <p>暴动联邦成员</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'KKH')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="vote('KKH')">投票</button>
+                    <div class="vote-results" id="votes-KKH">票数: 0 (0%)</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="container" id="currency">
         <h2 class="section-title">宝联货币系统</h2>
-       
+        <div class="card-grid">
+            <div class="card">
+                <h3>货币政策</h3>
+                <p>采用去中心化数字货币，保障经济自由与透明。</p>
+            </div>
+            <div class="card">
+                <h3>发行计划</h3>
+                <p>初期发行1亿宝联币，逐步推广至全球。</p>
+            </div>
+        </div>
     </div>
 
     <div class="container" id="government">
@@ -377,11 +667,119 @@
                     <li>货币委员会：梁韩元</li>
                 </ul>
             </div>
-            <!-- 其他部门可继续补充 -->
         </div>
     </div>
 
-    
+    <div class="container" id="congress">
+        <h2 class="section-title">国会</h2>
+        <div class="card-grid">
+            <div class="card">
+                <img src="2.png" alt="Party Flag" class="party-flag">
+                <h3>党旗</h3>
+                <p>象征团结与自由的宝东联邦党旗。</p>
+            </div>
+            <div class="card">
+                <img src="1.png" alt="Raised Flag" width="200px">
+                <h3>升旗仪式</h3>
+                <p>宝东联邦升起自由之旗，标志反抗的开始。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="jiangyonghui">
+        <h2 class="section-title">将永辉</h2>
+        <div class="card-grid">
+            <div class="card">
+                <img src="" alt="将永辉" class="avatar" id="avatar-JYH">
+                <h3>将永辉</h3>
+                <p>暴君将永辉，欺压人民，罪该万死。他强征赋税，剥削劳动果实，践踏自由与尊严。我们誓不效忠此等超正之人，推翻其统治乃正义之举。</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'JYH')">
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="election">
+        <h2 class="section-title">总统竞选</h2>
+        <div class="election-timer" id="electionTimer">投票截止倒计时: 计算中...</div>
+        <div class="card-grid">
+            <div class="card">
+                <img src="" alt="候选人1" class="avatar" id="avatar-C1">
+                <h3>候选人1</h3>
+                <p>竞选宣言：推动自由与平等</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'C1')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="votePresident('C1')">投票</button>
+                    <div class="vote-results" id="votes-C1">票数: 0 (0%)</div>
+                </div>
+            </div>
+            <div class="card">
+                <img src="" alt="候选人2" class="avatar" id="avatar-C2">
+                <h3>候选人2</h3>
+                <p>竞选宣言：重建经济与秩序</p>
+                <label class="image-upload">
+                    上传头像<input type="file" accept="image/*" onchange="uploadImage(event, 'C2')">
+                </label>
+                <div class="vote-section">
+                    <button onclick="votePresident('C2')">投票</button>
+                    <div class="vote-results" id="votes-C2">票数: 0 (0%)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="jobs">
+        <h2 class="section-title">职位表</h2>
+        <div class="table-container">
+            <table class="job-table">
+                <thead>
+                    <tr>
+                        <th>职位</th>
+                        <th>负责人</th>
+                        <th>职责</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>联邦总统</td>
+                        <td>张明旭</td>
+                        <td>领导联邦，指挥反抗军</td>
+                        <td>已任命</td>
+                    </tr>
+                    <tr>
+                        <td>副总统</td>
+                        <td>刘和平</td>
+                        <td>协助总统，管理调查局</td>
+                        <td>已任命</td>
+                    </tr>
+                    <tr>
+                        <td>宣传部长</td>
+                        <td>待定</td>
+                        <td>推广联邦理念</td>
+                        <td>招聘中</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container" id="videos">
+        <h2 class="section-title">视频分享</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                <h3>反抗军宣传片</h3>
+            </div>
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+                <h3>自由宣言</h3>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p>宝东联邦 2025 | 宪法Version 1.0 | 开源代码：<a href="#" style="color: var(--primary-color)">GitHub</a></p>
@@ -391,7 +789,61 @@
         </div>
     </footer>
 
+    <div class="anthem-player">
+        <button id="playAnthem"><i class="fas fa-play"></i></button>
+        <span>播放国歌：折风渡夜</span>
+    </div>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <audio id="anthem" src="https://m704.music.126.net/20250321210816/49fd862a79bc2e8728e4ff759aa8e172/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/4787973802/5a43/6897/9b58/a7581ebe739760d8b552da87bf7e17f4.m4a?vuutv=222rpJMTJJ1Xy3dAbvhMHmQehTRZRwxfoOSgaf9ynsO8IFvrX2w93MrU/sTWK8+NZ/MpIuVcN9r0c8ywKqFIOQ7wIiaUIP49Dyu4lZnp78E=&authSecret=00000195b8baad3b0ee50a3084a11766"></audio>
+
     <script>
+        let votes = JSON.parse(localStorage.getItem('votes')) || {
+            ZMX: 0, LPX: 0, ZRJ: 0, WZH: 0, LYH: 0, LYX: 0, YZS: 0, JM: 0, BJJ: 0, KKH: 0
+        };
+        let totalVotes = Object.values(votes).reduce((a, b) => a + b, 0);
+
+        function loadImages() {
+            const avatars = ['ZMX', 'LPX', 'ZRJ', 'WZH', 'LYH', 'LYX', 'YZS', 'JM', 'BJJ', 'KKH', 'JYH', 'C1', 'C2'];
+            avatars.forEach(id => {
+                const imgData = localStorage.getItem(`avatar-${id}`);
+                if (imgData) {
+                    document.getElementById(`avatar-${id}`).src = imgData;
+                }
+            });
+        }
+
+        function updateVoteResults() {
+            totalVotes = Object.values(votes).reduce((a, b) => a + b, 0);
+            for (let candidate in votes) {
+                const voteCount = votes[candidate];
+                const percentage = totalVotes === 0 ? 0 : ((voteCount / totalVotes) * 100).toFixed(1);
+                document.getElementById(`votes-${candidate}`).textContent = `票数: ${voteCount} (${percentage}%)`;
+            }
+            localStorage.setItem('votes', JSON.stringify(votes));
+        }
+
+        function vote(candidate) {
+            votes[candidate]++;
+            updateVoteResults();
+        }
+
+        function uploadImage(event, id) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgData = e.target.result;
+                    document.getElementById(`avatar-${id}`).src = imgData;
+                    localStorage.setItem(`avatar-${id}`, imgData);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
         window.addEventListener('scroll', () => {
             document.querySelectorAll('.card').forEach(card => {
                 const offset = card.getBoundingClientRect().top - window.innerHeight;
@@ -404,11 +856,105 @@
 
         document.querySelectorAll('.card').forEach(card => {
             card.style.opacity = 0;
-            card.style.transform = 'translateY(20px)';
+            card.style.transform = 'translateY(30px)';
             card.style.transition = 'all 0.8s ease-out';
         });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 300);
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const anthem = document.getElementById('anthem');
+        const playButton = document.getElementById('playAnthem');
+        let isPlaying = false;
+
+        playButton.addEventListener('click', () => {
+            if (isPlaying) {
+                anthem.pause();
+                playButton.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                anthem.play();
+                playButton.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        anthem.addEventListener('ended', () => {
+            playButton.innerHTML = '<i class="fas fa-play"></i>';
+            isPlaying = false;
+        });
+
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('.nav');
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        let presidentVotes = JSON.parse(localStorage.getItem('presidentVotes')) || { C1: 0, C2: 0 };
+        let totalPresidentVotes = Object.values(presidentVotes).reduce((a, b) => a + b, 0);
+
+        function updatePresidentVoteResults() {
+            totalPresidentVotes = Object.values(presidentVotes).reduce((a, b) => a + b, 0);
+            for (let candidate in presidentVotes) {
+                const voteCount = presidentVotes[candidate];
+                const percentage = totalPresidentVotes === 0 ? 0 : ((voteCount / totalPresidentVotes) * 100).toFixed(1);
+                document.getElementById(`votes-${candidate}`).textContent = `票数: ${voteCount} (${percentage}%)`;
+            }
+            localStorage.setItem('presidentVotes', JSON.stringify(presidentVotes));
+        }
+
+        function votePresident(candidate) {
+            presidentVotes[candidate]++;
+            updatePresidentVoteResults();
+        }
+
+        const electionCycle = 4 * 24 * 60 * 60 * 1000; // 4 days in milliseconds
+        function getNextElectionTime() {
+            const now = new Date().getTime();
+            const lastElection = localStorage.getItem('lastElection') ? parseInt(localStorage.getItem('lastElection')) : now;
+            const timeSinceLastElection = now - lastElection;
+            if (timeSinceLastElection >= electionCycle) {
+                localStorage.setItem('lastElection', now);
+                presidentVotes = { C1: 0, C2: 0 }; // Reset votes
+                updatePresidentVoteResults();
+                return now + electionCycle;
+            }
+            return lastElection + electionCycle;
+        }
+
+        function updateElectionTimer() {
+            const now = new Date().getTime();
+            const electionEnd = getNextElectionTime();
+            const timeLeft = electionEnd - now;
+
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                document.getElementById('electionTimer').textContent = `投票截止倒计时: ${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+            } else {
+                document.getElementById('electionTimer').textContent = '投票已结束，新选举即将开始';
+                setTimeout(() => {
+                    updateElectionTimer();
+                }, 1000);
+            }
+        }
+
+        setInterval(updateElectionTimer, 1000);
+
+        window.onload = () => {
+            loadImages();
+            updateVoteResults();
+            updatePresidentVoteResults();
+            updateElectionTimer();
+        };
     </script>
 </body>
 
 </html>
-    
